@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/PM-eShop.iml" filepath="$PROJECT_DIR$/.idea/PM-eShop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eshop-admin/eshop-admin.iml" filepath="$PROJECT_DIR$/eshop-admin/eshop-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eshop-admingateway/eshop-admingateway.iml" filepath="$PROJECT_DIR$/eshop-admingateway/eshop-admingateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eshop-product/eshop-product.iml" filepath="$PROJECT_DIR$/eshop-product/eshop-product.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eshop-smtp/eshop-smtp.iml" filepath="$PROJECT_DIR$/eshop-smtp/eshop-smtp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eshop-user/eshop-user.iml" filepath="$PROJECT_DIR$/eshop-user/eshop-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eshop-usergateway/eshop-usergateway.iml" filepath="$PROJECT_DIR$/eshop-usergateway/eshop-usergateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-service/eureka-service.iml" filepath="$PROJECT_DIR$/eureka-service/eureka-service.iml" />
+    </modules>
+  </component>
+</project>

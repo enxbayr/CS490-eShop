@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a2a0638b-3862-4598-9277-01691664ef79" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/EshopAdminApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/EshopAdminApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/controller/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/controller/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/controller/PromotionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/controller/PromotionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/controller/RequirementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/controller/RequirementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/controller/VendorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/controller/VendorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/CustomerRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/CustomerRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/CustomerStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/CustomerStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/CategoryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/CategoryDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/CustomerDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/CustomerDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/EmployeeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/EmployeeDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/PersonDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/PersonDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/ProductDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/StatusDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/StatusDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/VendorDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Dto/VendorDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/ProductImage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/ProductStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/ProductStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Promotion.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Promotion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Requirement.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/Requirement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/RequirementStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/domain/RequirementStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/repository/EmployeeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/repository/EmployeeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/repository/RequirementRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/repository/RequirementRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/repository/VendorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/repository/VendorRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/security/response/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/security/response/AuthenticationResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/security/service/AuthValidationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/security/service/AuthValidationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/security/service/JwtUserDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/security/service/JwtUserDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/CustomerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/CustomerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/EmployeeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/EmployeeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/PromotionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/PromotionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/PromotionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/PromotionServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/RequirementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/RequirementService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/RequirementServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/RequirementServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/VendorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/service/VendorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/utils/IdGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/java/edu/miu/eshop/eshopadmin/utils/IdGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-admin/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-admin/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eshop-user/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/eshop-user/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/eshop-admin" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1ftYskPMrdN7DIDGmbfz48b7za0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.applicationServers" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/eshop-admingateway/src/main/resources" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.EshopAdminApplication">
+    <configuration name="EshopAdminApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="eshop-admin" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.miu.eshop.eshopadmin.EshopAdminApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EshopAdmingatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="eshop-admingateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.miu.eshop.eshopadmingateway.EshopAdmingatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EshopSmtpApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="eshop-smtp" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.miu.eshop.smtp.eshopsmtp.EshopSmtpApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EshopUserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="eshop-user" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.miu.eshop.eshopuser.EshopUserApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EshopUsergatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="eshop-usergateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.miu.eshop.eshopusergateway.EshopUsergatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EurekaServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="eureka-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.miu.eshop.eurekaservice.EurekaServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductModuleApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="eshop-product" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.miu.eshop.product.ProductModuleApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a2a0638b-3862-4598-9277-01691664ef79" name="Default Changelist" comment="" />
+      <created>1597039064211</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597039064211</updated>
+      <workItem from="1597039066489" duration="289000" />
+      <workItem from="1597039446364" duration="3458000" />
+      <workItem from="1597082582684" duration="2426000" />
+      <workItem from="1597085487237" duration="5175000" />
+      <workItem from="1597092735110" duration="5872000" />
+      <workItem from="1597098767165" duration="772000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="275" y="74" key="#Inspections" timestamp="1597094828528">
+      <screen x="0" y="23" width="1280" height="732" />
+    </state>
+    <state x="275" y="74" key="#Inspections/0.23.1280.732@0.23.1280.732" timestamp="1597094828528" />
+    <state x="128" y="23" key="#Project_Structure" timestamp="1597092961766">
+      <screen x="0" y="23" width="1280" height="732" />
+    </state>
+    <state x="128" y="23" key="#Project_Structure/0.23.1280.732@0.23.1280.732" timestamp="1597092961766" />
+    <state x="453" y="102" key="#com.intellij.ide.util.MemberChooser" timestamp="1597097002912">
+      <screen x="0" y="23" width="1280" height="732" />
+    </state>
+    <state x="453" y="102" key="#com.intellij.ide.util.MemberChooser/0.23.1280.732@0.23.1280.732" timestamp="1597097002912" />
+    <state width="865" height="308" key="GridCell.Tab.0.bottom" timestamp="1597099029073">
+      <screen x="0" y="23" width="1280" height="732" />
+    </state>
+    <state width="865" height="308" key="GridCell.Tab.0.bottom/0.23.1280.732@0.23.1280.732" timestamp="1597099029073" />
+    <state width="886" height="220" key="GridCell.Tab.0.bottom/0.23.1280.733@0.23.1280.733" timestamp="1597081799463" />
+    <state width="865" height="308" key="GridCell.Tab.0.center" timestamp="1597099029072">
+      <screen x="0" y="23" width="1280" height="732" />
+    </state>
+    <state width="865" height="308" key="GridCell.Tab.0.center/0.23.1280.732@0.23.1280.732" timestamp="1597099029072" />
+    <state width="886" height="220" key="GridCell.Tab.0.center/0.23.1280.733@0.23.1280.733" timestamp="1597081799418" />
+    <state width="865" height="308" key="GridCell.Tab.0.left" timestamp="1597099029071">
+      <screen x="0" y="23" width="1280" height="732" />
+    </state>
+    <state width="865" height="308" key="GridCell.Tab.0.left/0.23.1280.732@0.23.1280.732" timestamp="1597099029071" />
+    <state width="886" height="220" key="GridCell.Tab.0.left/0.23.1280.733@0.23.1280.733" timestamp="1597081799416" />
+    <state width="865" height="308" key="GridCell.Tab.0.right" timestamp="1597099029073">
+      <screen x="0" y="23" width="1280" height="732" />
+    </state>
+    <state width="865" height="308" key="GridCell.Tab.0.right/0.23.1280.732@0.23.1280.732" timestamp="1597099029073" />
+    <state width="886" height="220" key="GridCell.Tab.0.right/0.23.1280.733@0.23.1280.733" timestamp="1597081799419" />
+    <state width="865" height="308" key="GridCell.Tab.1.bottom" timestamp="1597099029074">
+      <screen x="0" y="23" width="1280" height="732" />
+    </state>
+    <state width="865" height="308" key="GridCell.Tab.1.bottom/0.23.1280.732@0.23.1280.732" timestamp="1597099029074" />
+    <state width="886" height="220" key="GridCell.Tab.1.bottom/0.23.1280.733@0.23.1280.733" timestamp="1597081799467" />
+    <state width="865" height="308" key="GridCell.Tab.1.center" timestamp="1597099029074">
+      <screen x="0" y="23" width="1280" height="732" />
+    </state>
+    <state width="865" height="308" key="GridCell.Tab.1.center/0.23.1280.732@0.23.1280.732" timestamp="1597099029074" />
+    <state width="886" height="220" key="GridCell.Tab.1.center/0.23.1280.733@0.23.1280.733" timestamp="1597081799466" />
+    <state width="865" height="308" key="GridCell.Tab.1.left" timestamp="1597099029073">
+      <screen x="0" y="23" width="1280" height="732" />
+    </state>
+    <state width="865" height="308" key="GridCell.Tab.1.left/0.23.1280.732@0.23.1280.732" timestamp="1597099029073" />
+    <state width="886" height="220" key="GridCell.Tab.1.left/0.23.1280.733@0.23.1280.733" timestamp="1597081799465" />
+    <state width="865" height="308" key="GridCell.Tab.1.right" timestamp="1597099029074">
+      <screen x="0" y="23" width="1280" height="732" />
+    </state>
+    <state width="865" height="308" key="GridCell.Tab.1.right/0.23.1280.732@0.23.1280.732" timestamp="1597099029074" />
+    <state width="886" height="220" key="GridCell.Tab.1.right/0.23.1280.733@0.23.1280.733" timestamp="1597081799466" />
+    <state x="255" y="95" key="NewModule_or_Project.wizard" timestamp="1597092940773">
+      <screen x="0" y="23" width="1280" height="732" />
+    </state>
+    <state x="255" y="95" key="NewModule_or_Project.wizard/0.23.1280.732@0.23.1280.732" timestamp="1597092940773" />
+  </component>
+</project>
