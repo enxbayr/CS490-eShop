@@ -29,6 +29,7 @@ public class RequirementServiceImpl implements RequirementService {
 
 	@Override
 	public Requirement save(Requirement requirement) {
+		requirement.setCreatedDate(LocalDate.now());
 		return requirementRepository.save(requirement);
 	}
 
@@ -52,6 +53,10 @@ public class RequirementServiceImpl implements RequirementService {
 		requirement.setStatus(editedRequirement.getStatus());
 		requirement.setDescription(editedRequirement.getDescription());
 		requirement.setComments(editedRequirement.getComments());
+		requirement.setEngineer(editedRequirement.getEngineer());
+
+		if(editedRequirement.getStatus().equals(RequirementStatus.CLOSED))
+			requirement.setEndedDate(LocalDate.now());
 
 		return requirementRepository.save(requirement);
 	}

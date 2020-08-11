@@ -16,13 +16,16 @@ edu/miu/eshop/eshopuser/security/response/AuthenticationResponse.class
 edu/miu/eshop/eshopuser/security/SecurityConfigurer.class
 edu/miu/eshop/eshopuser/ServletInitializer.class
 edu/miu/eshop/eshopuser/domain/Dto/AddressDto.class
+edu/miu/eshop/eshopuser/utils/IdGenerator.class
 edu/miu/eshop/eshopuser/security/jwt/AuthEntryPointJwt.class
 edu/miu/eshop/eshopuser/repository/CustomerRepository.class
 edu/miu/eshop/eshopuser/controller/AuthenticationController.class
 edu/miu/eshop/eshopuser/domain/Dto/PasswordDto.class
 edu/miu/eshop/eshopuser/exception/CustomerNotFoundException.class
 edu/miu/eshop/eshopuser/security/jwt/JwtUtil.class
+edu/miu/eshop/eshopuser/security/service/AuthValidationServiceImpl.class
 edu/miu/eshop/eshopuser/domain/Dto/BankCardDto.class
+edu/miu/eshop/eshopuser/security/service/AuthValidationService.class
 edu/miu/eshop/eshopuser/domain/Customer.class
 edu/miu/eshop/eshopuser/exception/EmailAlreadyExistException.class
 edu/miu/eshop/eshopuser/domain/CustomerScoreDto.class

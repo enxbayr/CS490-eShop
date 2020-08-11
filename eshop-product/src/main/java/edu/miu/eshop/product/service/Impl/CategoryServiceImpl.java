@@ -27,8 +27,8 @@ public class CategoryServiceImpl implements CategoryService {
    @Override
    public void addCategory(String parentId, String value) {
 
-      Category root = categoryRepository.findByCategoryName("Root");
-//      List<Category> root = categoryRepository.findByCategoryName("Root");
+      Category root = categoryRepository.findByLabel("AllProducts");
+//      List<Category> root = categoryRepository.findByCategoryName("All Products");
      // Category category = root.addCategory(parentId, value);
      // System.out.println(category);
 
@@ -48,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
    @Override
    public void editCategory( String value, String CategoryId) {
 
-      Category category = categoryRepository.findByCategoryName("Root");
+      Category category = categoryRepository.findByLabel("AllProducts");
       category.editCategory(CategoryId, value);
       categoryRepository.save(category);
 
@@ -61,7 +61,7 @@ public class CategoryServiceImpl implements CategoryService {
 
    @Override
    public void deleteCategory( String categoryId) { // this is the category id in the dto used inplace of paretntId
-       Category category = categoryRepository.findByCategoryName("Root");
+       Category category = categoryRepository.findByLabel("AllProducts");
        category.deleteCategory(categoryId);
        categoryRepository.save(category);
    }

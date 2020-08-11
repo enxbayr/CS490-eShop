@@ -4,9 +4,12 @@ package edu.miu.eshop.eshopadmin.service;
 
 import edu.miu.eshop.eshopadmin.domain.Category;
 import edu.miu.eshop.eshopadmin.domain.Dto.CategoryDto;
+import edu.miu.eshop.eshopadmin.domain.Dto.ProductDto;
+import edu.miu.eshop.eshopadmin.domain.Product;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -61,7 +64,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void editCategory(CategoryDto categoryDto) {
-        restTemplate.postForObject(prop.getProperty("eshop.product.url.base") + "/categories/edit", categoryDto, CategoryDto.class);
+        HttpEntity<CategoryDto> requestUpdate = new HttpEntity<>(categoryDto);
+        restTemplate.exchange(prop.getProperty("eshop.product.url.base") + "/categories/edit", HttpMethod.PUT, requestUpdate, CategoryDto.class);
     }
 
     @Override
@@ -75,7 +79,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(CategoryDto categoryDto) { // this is the category id in the dto used inplace of paretntId
-        restTemplate.delete(prop.getProperty("eshop.product.url.base") + "/categories/delete", categoryDto, CategoryDto.class);
+    public void deleteCategory(String categoryId) { // this is the category id in the dto used inplace of paretntId
+        restTemplate.delete(prop.getProperty("eshop.product.url.base") + "/categories/delete/" + categoryId, null, CategoryDto.class);
     }
 }

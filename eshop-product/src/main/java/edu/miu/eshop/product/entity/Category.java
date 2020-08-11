@@ -24,26 +24,26 @@ public class Category {
      * We should ask category status ??? ADDED USER ID add
      */
     @Id
-    @JsonProperty("key")
-    private String id;
-    @JsonProperty("label")
-    private String categoryName;
-    @JsonProperty("nodes")
-    private List<Category> subCategories = new ArrayList<>();;
+    //@JsonProperty("key")
+    private String key; //id
+    //@JsonProperty("label")
+    private String label; //categoryName
+    //@JsonProperty("nodes")
+    private List<Category> nodes = new ArrayList<>(); //subCategories
 
-    public Category(String categoryName) {
-        this.categoryName = categoryName;
+    public Category(String label) {
+        this.label = label;
     }
 
     public Category addCategory(String parentId, String value){
-        if(this.id.equals(parentId)) {
+        if(this.key.equals(parentId)) {
             Category c = new Category(value);
-            c.setId(generateCategoryId());
-            this.subCategories.add(c);
+            c.setKey(generateCategoryId());
+            this.nodes.add(c);
             return c;
         }
 
-        for(Category c : this.subCategories){
+        for(Category c : this.nodes){
             Category category = c.addCategory(parentId, value);
                 if(category!=null)
                     return category;
@@ -52,11 +52,11 @@ public class Category {
     }
 
     public boolean deleteCategory(String id){
-        ListIterator<Category> iterator = this.subCategories.listIterator();
+        ListIterator<Category> iterator = this.nodes.listIterator();
 
         while(iterator.hasNext()){
             Category c = iterator.next();
-            if(c.id.equals(id)) {
+            if(c.key.equals(id)) {
                 iterator.remove();
                 return true;
             }
@@ -69,11 +69,11 @@ public class Category {
     }
 
     public boolean editCategory(String id, String value){
-        Iterator<Category> iterator = this.subCategories.iterator();
+        Iterator<Category> iterator = this.nodes.iterator();
         while(iterator.hasNext()){
             Category c = iterator.next();
-            if(c.id.equals(id)  ) {
-                c.categoryName=value;
+            if(c.key.equals(id)  ) {
+                c.label=value;
                 return true;
             }
             else {
@@ -82,7 +82,6 @@ public class Category {
             }
         }
         return false;
-
     }
 
 

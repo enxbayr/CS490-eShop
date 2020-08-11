@@ -3,6 +3,7 @@ package edu.miu.eshop.eshopadmin.service;
 // HH
 
 import edu.miu.eshop.eshopadmin.domain.Dto.ProductDto;
+import edu.miu.eshop.eshopadmin.domain.Dto.StatusDto;
 import edu.miu.eshop.eshopadmin.domain.Product;
 import edu.miu.eshop.eshopadmin.domain.ProductStatus;
 import org.modelmapper.ModelMapper;
@@ -82,7 +83,6 @@ public class ProductServiceImpl implements ProductService {
 				HttpMethod.GET,
 				null,
 				new ParameterizedTypeReference<List<ProductDto>>(){});
-		System.out.println("HEHEHEHE: " + response);
 		return response.getBody();
 	}
 
@@ -117,15 +117,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ResponseEntity<Product> updateStatus(String id, ProductStatus status) {
-		HttpEntity<ProductStatus> requestUpdate = new HttpEntity<>(status);
-		return restTemplate.exchange(prop.getProperty("eshop.product.url.base") + "/products/updatestatus/" + id, HttpMethod.PUT, requestUpdate, Product.class);
+	public ResponseEntity<String> updateStatus(String id, StatusDto status) {
+		HttpEntity<StatusDto> requestUpdate = new HttpEntity<>(status);
+		return restTemplate.exchange(prop.getProperty("eshop.product.url.base") + "/products/updatestatus/" + id, HttpMethod.PUT, requestUpdate, String.class);
 	}
 
 	@Override
-	public ResponseEntity<Product> updateProduct(String productId, ProductDto productDto) {
+	public ResponseEntity<ProductDto> updateProduct(String productId, ProductDto productDto) {
 		HttpEntity<ProductDto> requestUpdate = new HttpEntity<>(productDto);
-		return restTemplate.exchange(prop.getProperty("eshop.product.url.base") + "/products/updatestatus/" + productId, HttpMethod.PUT, requestUpdate, Product.class);
+		return restTemplate.exchange(prop.getProperty("eshop.product.url.base") + "/products/update/" + productId, HttpMethod.PUT, requestUpdate, ProductDto.class);
 	}
 
 

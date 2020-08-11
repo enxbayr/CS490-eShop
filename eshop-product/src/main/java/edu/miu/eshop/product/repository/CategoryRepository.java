@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface CategoryRepository extends MongoRepository<Category, String> {
-    Category findByCategoryName(String categoryName);
+    Category findByLabel(String categoryName);
 
 }

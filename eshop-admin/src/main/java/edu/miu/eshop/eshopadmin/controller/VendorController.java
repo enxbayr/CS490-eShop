@@ -33,7 +33,6 @@ public class VendorController {
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     public List<VendorDto> getAllCustomer(){
-
         return vendorService.getAll().stream().map(VendorDto::build).collect(Collectors.toList());
     }
 

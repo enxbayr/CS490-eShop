@@ -44,17 +44,16 @@ public class CategoryController {
 
 	@PutMapping("/edit")
 	public ResponseEntity editCategory(@RequestBody CategoryDto categoryDto){
-
 		categoryService.editCategory(categoryDto);
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(categoryService.getAll());
 	}
 
-	@DeleteMapping("/delete")
-	public ResponseEntity deleteCategory(@RequestBody CategoryDto categoryDto){
+	@DeleteMapping("/delete/{categoryId}")
+	public ResponseEntity deleteCategory(@PathVariable String categoryId){
 
-		categoryService.deleteCategory(categoryDto);
+		categoryService.deleteCategory(categoryId);
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(categoryService.getAll());

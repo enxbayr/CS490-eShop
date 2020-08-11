@@ -42,7 +42,6 @@ public class CategoryController {
 
     @PutMapping("/edit")
     public ResponseEntity editCategory(@RequestBody CategoryDto categoryDto){
-
         categoryService.editCategory( categoryDto.getValue(),categoryDto.getCategoryId());
         return ResponseEntity
                 .status(HttpStatus.OK)

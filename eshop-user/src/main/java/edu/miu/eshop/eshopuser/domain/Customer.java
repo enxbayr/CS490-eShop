@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Document
@@ -27,10 +28,9 @@ public class Customer {
     private String password;
     private String firstName;
     private String lastName;
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdDate;
     private String phone;
-    private Set<BankCardDto> cards;
+    private Set<BankCardDto> cards = new HashSet<>();
     private CustomerStatus status = CustomerStatus.ACTIVE;
     private Role role = Role.ROLE_CUSTOMER;
     private String imageUrl;

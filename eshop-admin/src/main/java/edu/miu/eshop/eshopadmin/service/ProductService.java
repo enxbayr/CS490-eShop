@@ -3,6 +3,7 @@ package edu.miu.eshop.eshopadmin.service;
 // HH
 
 import edu.miu.eshop.eshopadmin.domain.Dto.ProductDto;
+import edu.miu.eshop.eshopadmin.domain.Dto.StatusDto;
 import edu.miu.eshop.eshopadmin.domain.Product;
 import edu.miu.eshop.eshopadmin.domain.ProductStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public interface ProductService {
 
 	List<ProductDto> getProductsOnPromotion();
 
-	ResponseEntity<Product> updateStatus(String id, ProductStatus status);
+	ResponseEntity<String> updateStatus(String id, StatusDto status);
 
-	ResponseEntity<Product> updateProduct(String productid, ProductDto productDto);
+	ResponseEntity<ProductDto> updateProduct(String productid, ProductDto productDto);
 }

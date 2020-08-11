@@ -15,7 +15,7 @@ public interface CategoryService {
 
 	void editCategory(CategoryDto categoryDto);
 
-	void deleteCategory(CategoryDto categoryDto);
+	void deleteCategory(String categoryId);
 
 	void addCategory(CategoryDto categoryDto);
 }

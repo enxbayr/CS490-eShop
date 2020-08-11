@@ -5,6 +5,7 @@ package edu.miu.eshop.eshopadmin.controller;
 import edu.miu.eshop.eshopadmin.domain.Dto.ProductDto;
 import edu.miu.eshop.eshopadmin.domain.Dto.StatusDto;
 import edu.miu.eshop.eshopadmin.domain.Product;
+import edu.miu.eshop.eshopadmin.domain.ProductStatus;
 import edu.miu.eshop.eshopadmin.service.ProductService;
 import edu.miu.eshop.eshopadmin.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,6 @@ public class ProductController {
 
 	@GetMapping("/vendor/{vendorid}")
 	public ResponseEntity getProductByVendor(@PathVariable String vendorid){
-
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body( productService.getProductsByVendorId(vendorid));
@@ -78,18 +78,17 @@ public class ProductController {
 	}
 
 	@PutMapping("/updatestatus/{id}")
-	public ResponseEntity updateStatus(@PathVariable String id, @RequestBody StatusDto newstatus){
-		Product product = productService.updateStatus(id, newstatus.getStatus()).getBody();
+	public ResponseEntity updateStatus(@PathVariable String id, @RequestBody StatusDto newStatus){
 		return ResponseEntity
 				.status(HttpStatus.OK)
-				.body(product.getStatus().ordinal());
+				.body(productService.updateStatus(id, newStatus).getBody().substring(14));
 	}
 
 	@PutMapping("/update/{productId}")
 	public ResponseEntity updateProduct(@PathVariable String productId, @RequestBody ProductDto productDto) throws ParseException {
-		Product updatedProduct  = productService.updateProduct(productId, productDto).getBody();
+		ProductDto updatedProduct  = productService.updateProduct(productId, productDto).getBody();
 		return ResponseEntity
 				.status(HttpStatus.OK)
-				.body( updatedProduct);
+				.body(updatedProduct);
 	}
 }

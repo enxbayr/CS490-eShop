@@ -75,13 +75,20 @@ public class ProductController {
                 .body( productService.getProductsOnPromotion());
     }
 
-    @PutMapping("updatestatus/{id}")
+    @PutMapping("/updatestatus/{id}")
     public ResponseEntity updateStatus(@PathVariable String id, @RequestBody StatusDto newstatus){
-        System.out.println(newstatus);
         Product product = productService.updateStatus(id, newstatus.getStatus());
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(product.getStatus().ordinal());
+                .body(product.getStatus().toString());
+    }
+
+    @PutMapping("/update/{productid}")
+    public ResponseEntity updateProduct(@PathVariable String productid, @RequestBody ProductDto productDto) throws ParseException {
+        Product updatedProduct  = productService.updateProduct(productDto,  productid);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body( updatedProduct);
     }
 
     @DeleteMapping("/delete/{productid}")
@@ -93,13 +100,5 @@ public class ProductController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body( deletedProduct);
-    }
-
-    @PutMapping("/update/{productid}")
-    public ResponseEntity updateProduct(@PathVariable String productid, @RequestBody ProductDto productDto) throws ParseException {
-        Product updatedProduct  = productService.updateProduct(productDto,  productid);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body( updatedProduct);
     }
 }

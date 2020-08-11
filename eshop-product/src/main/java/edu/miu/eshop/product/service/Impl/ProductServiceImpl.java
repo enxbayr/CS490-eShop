@@ -77,8 +77,8 @@ public class ProductServiceImpl implements ProductService {
 
         for (Product p: productsUnderCategory  ) {
             Category subCat = categoryRepository.findById(p.getCategoryId()).get();
-            for (Category c:subCat.getSubCategories()){
-                if(c.getCategoryName().equals(subCategoryName)){
+            for (Category c:subCat.getNodes()){
+                if(c.getLabel().equals(subCategoryName)){
                     products.add(p);
                 }
             }
@@ -114,18 +114,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateStatus(String id, ProductStatus newStatus) {
-        Product product =  productRepository.findByProductId(id);
+        Product product = productRepository.findByProductId(id);
         product.setStatus(newStatus);
-        productRepository.save(product);
-        return  product;
+        return productRepository.save(product);
     }
 
     @Override
-    public Product updateProduct(ProductDto productDto, String productid) throws ParseException {
-
-         Product product = convertToEntity(productDto,  productid);
-         productRepository.save(product);
-         return  product;
+    public Product updateProduct(ProductDto productDto, String productId) throws ParseException {
+         Product product = convertToEntity(productDto, productId);
+         return productRepository.save(product);
     }
 
     @Override

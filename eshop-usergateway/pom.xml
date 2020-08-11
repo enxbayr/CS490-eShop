@@ -12,6 +12,7 @@
     <artifactId>eshop-usergateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>eshop-usergateway</name>
+    <packaging>war</packaging>
     <description>Zuul UserGateWay</description>
 
     <properties>
@@ -27,6 +28,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

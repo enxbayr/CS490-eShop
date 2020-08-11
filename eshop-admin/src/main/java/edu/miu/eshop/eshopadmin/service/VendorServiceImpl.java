@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service("VendorService")
@@ -44,7 +45,9 @@ public class VendorServiceImpl implements VendorService {
 
     @Override
     public List<Vendor> getAll() {
-        return vendorRepository.findAll();
+        return vendorRepository.findAll().stream()
+                .filter(v -> !v.getStatus().equals(PersonStatus.DELETED))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -112,9 +115,9 @@ public class VendorServiceImpl implements VendorService {
 
     @Override
     public void removeCard(String vendorId, BankCardDto bankCardDto) {
-        Query query = new Query(Criteria.where("_id").is(vendorId));
+        Query query = new Query(Criteria.where("personId").is(vendorId));
         Update update = new Update().pull("cards", bankCardDto);
-        Vendor oldCustomer = mongoTemplate.update(Vendor.class)
+        mongoTemplate.update(Vendor.class)
                 .matching(query)
                 .apply(update)
                 .findAndModifyValue();

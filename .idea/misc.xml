@@ -4,7 +4,10 @@
     <file type="web" url="file://$PROJECT_DIR$/eshop-admin" />
     <file type="web" url="file://$PROJECT_DIR$/eshop-admingateway" />
     <file type="web" url="file://$PROJECT_DIR$/eshop-product" />
+    <file type="web" url="file://$PROJECT_DIR$/eshop-smtp" />
     <file type="web" url="file://$PROJECT_DIR$/eshop-user" />
+    <file type="web" url="file://$PROJECT_DIR$/eshop-usergateway" />
+    <file type="web" url="file://$PROJECT_DIR$/eureka-service" />
   </component>
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
@@ -20,6 +23,7 @@
         <option value="$PROJECT_DIR$/eshop-usergateway/pom.xml" />
         <option value="$PROJECT_DIR$/eshop-admingateway/pom.xml" />
         <option value="$PROJECT_DIR$/eshop-product/pom.xml" />
+        <option value="$PROJECT_DIR$/eshop-smtp/pom.xml" />
       </list>
     </option>
   </component>

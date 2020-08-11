@@ -19,67 +19,89 @@ import java.util.ListIterator;
 public class Category {
 
 	/**
-	 * We should ask category status ??? ADDED USER ID
+	 * We should ask category status ??? ADDED USER ID add
 	 */
 	@Id
-	private String id;
-	private String categoryName;
-	private List<Category> subCategories = new ArrayList<>();;
+	//@JsonProperty("key")
+	private String key; //id
+	//@JsonProperty("label")
+	private String label; //categoryName
+	//@JsonProperty("nodes")
+	private List<Category> nodes = new ArrayList<>(); //subCategories
 
-	public Category(String categoryName, String id) {
-		this.categoryName = categoryName;
-		this.id = id;
+	public Category(String label) {
+		this.label = label;
 	}
 
-	public Category(String categoryName) {
-		this.categoryName = categoryName;
-	}
-
-	public Category addCategory(String parentId, String value, String categoryId){
-		if(this.id.equals(parentId)) {
-
-			Category c = new Category(value,categoryId);
-			if(!this.subCategories.contains(c)){
-				this.subCategories.add(c);
-			}
+	public Category addCategory(String parentId, String value){
+		if(this.key.equals(parentId)) {
+			Category c = new Category(value);
+			c.setKey(generateCategoryId());
+			this.nodes.add(c);
 			return c;
 		}
 
-		for(Category c : subCategories){
-			if(!this.subCategories.contains(c)){
-				c.addCategory(parentId, value, categoryId);
-			}
+		for(Category c : this.nodes){
+			Category category = c.addCategory(parentId, value);
+			if(category!=null)
+				return category;
 		}
 		return null;
 	}
 
 	public boolean deleteCategory(String id){
-		ListIterator<Category> iterator = this.subCategories.listIterator();
+		ListIterator<Category> iterator = this.nodes.listIterator();
+
 		while(iterator.hasNext()){
 			Category c = iterator.next();
-			if(c.id.equals(id)) {
+			if(c.key.equals(id)) {
 				iterator.remove();
 				return true;
 			}
 			else {
-				return c.deleteCategory( id);
+				if(c.deleteCategory( id))
+					return true;
 			}
 		}
 		return false;
 	}
 
 	public boolean editCategory(String id, String value){
-		Iterator<Category> iterator = this.subCategories.iterator();
+		Iterator<Category> iterator = this.nodes.iterator();
 		while(iterator.hasNext()){
 			Category c = iterator.next();
-			if(c.id!=null && c.id.equals(id)  ) {
-				c.categoryName=value;
+			if(c.key.equals(id)  ) {
+				c.label=value;
 				return true;
 			}
 			else {
-				return editCategory( id, value);
+				if(c.editCategory( id, value))
+					return true;
 			}
 		}
 		return false;
+	}
+
+
+	//generate order number of length 20
+	private String generateCategoryId() {
+
+		// chose a Character random from this String
+		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+				+ "0123456789" ;
+
+		// create StringBuffer size of AlphaNumericString
+		StringBuilder sb = new StringBuilder(15);
+
+		for (int i = 0; i < 20; i++) {
+
+			// generate a random number between 0 to AlphaNumericString variable length
+			int index = (int)(AlphaNumericString.length() * Math.random());
+
+			// add Character one by one in end of sb
+			sb.append(AlphaNumericString.charAt(index));
+		}
+
+		return sb.toString();
 	}
 }
