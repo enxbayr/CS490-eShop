@@ -1,12 +1,8 @@
 package edu.miu.eshop.product.service.Impl;
 
 import edu.miu.eshop.product.dto.ProductDto;
-import edu.miu.eshop.product.repository.CustomerRepository;
 import edu.miu.eshop.product.repository.ShoppingCartRepository;
-import edu.miu.eshop.product.entity.Product;
 import edu.miu.eshop.product.entity.CartItem;
-import edu.miu.eshop.product.entity.CustShopCartFactory;
-import edu.miu.eshop.product.entity.Customer;
 import edu.miu.eshop.product.entity.ShoppingCart;
 import edu.miu.eshop.product.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +18,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Autowired
     private ShoppingCartRepository shoppingCartRepository ;
-    @Autowired
-    private CustomerRepository customerRepository;
-
 
     @Override
     public void createNewCart(String userName) {

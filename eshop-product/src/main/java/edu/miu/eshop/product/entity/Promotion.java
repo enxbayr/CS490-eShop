@@ -3,16 +3,17 @@ package edu.miu.eshop.product.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
+@Document
 @Setter
 @Getter
 @NoArgsConstructor
 @ToString
 @AllArgsConstructor
 public class Promotion {
-
     @Id
     private  String id;
     private  String productId;

@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/PM-eShop.iml" filepath="$PROJECT_DIR$/.idea/PM-eShop.iml" />
       <module fileurl="file://$PROJECT_DIR$/eshop-admin/eshop-admin.iml" filepath="$PROJECT_DIR$/eshop-admin/eshop-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/eshop-admingateway/eshop-admingateway.iml" filepath="$PROJECT_DIR$/eshop-admingateway/eshop-admingateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eshop-bankapi/eshop-bankapi.iml" filepath="$PROJECT_DIR$/eshop-bankapi/eshop-bankapi.iml" />
       <module fileurl="file://$PROJECT_DIR$/eshop-product/eshop-product.iml" filepath="$PROJECT_DIR$/eshop-product/eshop-product.iml" />
       <module fileurl="file://$PROJECT_DIR$/eshop-smtp/eshop-smtp.iml" filepath="$PROJECT_DIR$/eshop-smtp/eshop-smtp.iml" />
       <module fileurl="file://$PROJECT_DIR$/eshop-user/eshop-user.iml" filepath="$PROJECT_DIR$/eshop-user/eshop-user.iml" />

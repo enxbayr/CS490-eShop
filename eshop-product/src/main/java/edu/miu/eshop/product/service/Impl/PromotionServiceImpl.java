@@ -34,7 +34,7 @@ public class PromotionServiceImpl implements PromotionService {
     @Override
     public void update(String promotionid, Promotion promotion) {
         Promotion oldPromotion = promotionRepository.findById(promotionid).get();
-        //oldPromotion.setProductId(promotion.getProductId());
+        oldPromotion.setProductId(promotion.getProductId());
         oldPromotion.setPromotionDescription(promotion.getPromotionDescription());
         oldPromotion.setPromoName(promotion.getPromoName());
         oldPromotion.setPromotionPercentage(promotion.getPromotionPercentage());

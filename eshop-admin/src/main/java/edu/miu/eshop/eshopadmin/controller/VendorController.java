@@ -3,6 +3,7 @@ package edu.miu.eshop.eshopadmin.controller;
 // EB
 
 import edu.miu.eshop.eshopadmin.domain.Dto.BankCardDto;
+import edu.miu.eshop.eshopadmin.domain.Dto.EmailDto;
 import edu.miu.eshop.eshopadmin.domain.Dto.PasswordDto;
 import edu.miu.eshop.eshopadmin.domain.Dto.VendorDto;
 import edu.miu.eshop.eshopadmin.domain.Vendor;
@@ -83,5 +84,8 @@ public class VendorController {
         vendorService.resetPassword(vendorId, passwordDto.getPassword());
     }
 
-///users/{}/reset https://www.baeldung.com/spring-security-registration-i-forgot-my-password
+    @GetMapping("/email/{vendorId}")
+    private EmailDto getEmail(@PathVariable String vendorId){
+        return EmailDto.build(vendorService.findById(vendorId));
+    }
 }

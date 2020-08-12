@@ -1,7 +1,6 @@
 package edu.miu.eshop.product.entity;
 
 import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @NoArgsConstructor
 @ToString

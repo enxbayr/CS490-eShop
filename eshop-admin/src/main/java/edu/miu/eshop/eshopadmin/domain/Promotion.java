@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @ToString
 @AllArgsConstructor
 public class Promotion {
+    @Id
     private  String id;
     private  String productId;
     private String vendorId;

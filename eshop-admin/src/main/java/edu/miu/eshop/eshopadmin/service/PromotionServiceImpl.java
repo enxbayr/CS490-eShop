@@ -73,7 +73,7 @@ public class PromotionServiceImpl implements PromotionService {
     @Override
     public Promotion update(String promotionId, Promotion promotion) {
         HttpEntity<Promotion> entity = new HttpEntity<>(promotion);
-        return restTemplate.exchange(prop.getProperty("eshop.user.url.base") + "/promotions/update/" + promotionId,
+        return restTemplate.exchange(prop.getProperty("eshop.product.url.base") + "/promotions/update/" + promotionId,
                 HttpMethod.PUT,
                 entity,
                 Promotion.class).getBody();

@@ -3,6 +3,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/eshop-admin" />
     <file type="web" url="file://$PROJECT_DIR$/eshop-admingateway" />
+    <file type="web" url="file://$PROJECT_DIR$/eshop-bankapi" />
     <file type="web" url="file://$PROJECT_DIR$/eshop-product" />
     <file type="web" url="file://$PROJECT_DIR$/eshop-smtp" />
     <file type="web" url="file://$PROJECT_DIR$/eshop-user" />
@@ -24,6 +25,7 @@
         <option value="$PROJECT_DIR$/eshop-admingateway/pom.xml" />
         <option value="$PROJECT_DIR$/eshop-product/pom.xml" />
         <option value="$PROJECT_DIR$/eshop-smtp/pom.xml" />
+        <option value="$PROJECT_DIR$/eshop-bankapi/pom.xml" />
       </list>
     </option>
   </component>
