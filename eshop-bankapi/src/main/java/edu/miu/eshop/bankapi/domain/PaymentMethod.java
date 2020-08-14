@@ -1,10 +1,12 @@
 package edu.miu.eshop.bankapi.domain;
 
 
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
+@ToString
 public class PaymentMethod {
 
 	@Id

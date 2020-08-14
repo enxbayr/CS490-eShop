@@ -10,6 +10,7 @@
         <module name="eshop-admingateway" />
         <module name="eshop-bankapi" />
         <module name="eshop-product" />
+        <module name="eshop-report" />
         <module name="eureka-service" />
         <module name="eshop-admin" />
         <module name="eshop-usergateway" />
@@ -20,8 +21,9 @@
     <bytecodeTargetLevel>
       <module name="eshop-admin" target="11" />
       <module name="eshop-admingateway" target="11" />
-      <module name="eshop-bankapi" target="1.8" />
+      <module name="eshop-bankapi" target="11" />
       <module name="eshop-product" target="11" />
+      <module name="eshop-report" target="11" />
       <module name="eshop-smtp" target="11" />
       <module name="eshop-user" target="11" />
       <module name="eshop-usergateway" target="11" />
@@ -34,6 +36,7 @@
       <module name="eshop-admingateway" options="-parameters" />
       <module name="eshop-bankapi" options="-parameters" />
       <module name="eshop-product" options="-parameters" />
+      <module name="eshop-report" options="-parameters" />
       <module name="eshop-smtp" options="-parameters" />
       <module name="eshop-user" options="-parameters" />
       <module name="eshop-usergateway" options="-parameters" />

@@ -1,6 +1,7 @@
 package edu.miu.eshop.product.api.Controller;
 
 import edu.miu.eshop.product.dto.GuestCustomerDto;
+import edu.miu.eshop.product.dto.UserNameDto;
 import edu.miu.eshop.product.entity.Card;
 import edu.miu.eshop.product.entity.Order;
 import edu.miu.eshop.product.entity.Customer;
@@ -23,28 +24,28 @@ public class OrderController {
     @Autowired
     private ShoppingCartService shoppingCartService;
 
-
     // ORDER CREATE
-    @GetMapping("create/{userName}")
-    public ResponseEntity createOrder(@PathVariable String userName){
-        ShoppingCart cart = shoppingCartService.findCartForUser(userName);
+    @PostMapping("/create")
+    public ResponseEntity createOrder(@RequestBody UserNameDto userNameDto){
+        ShoppingCart cart = shoppingCartService.findCartForUser(userNameDto.getUserName());
+        System.out.println(cart);
         if(cart==null )  {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("The user has no order");
         }
-        orderService.createOrder(cart, userName);
+        orderService.createOrder(cart, userNameDto.getUserName());
         return ResponseEntity
-                .status(HttpStatus.CREATED)
+                .status(HttpStatus.OK)
                 .body("Order created");
     }
 
     //READ
-    @GetMapping("/{userName}")
-    public ResponseEntity getAllOrders(@PathVariable String userName){
+    @GetMapping("/{customerId}")
+    public ResponseEntity getAllOrders(@PathVariable String customerId){
         return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body( orderService.getAllOrders(userName));
+                .status(HttpStatus.OK)
+                .body( orderService.getAllOrders(customerId));
     }
 
     @GetMapping("order/{orderNumber}")
@@ -76,7 +77,7 @@ public class OrderController {
         oldOrder.setUserName(newOrder.getUserName());
         oldOrder.setOrderDate(newOrder.getOrderDate());
         oldOrder.setTotalCost(newOrder.getTotalCost());
-        oldOrder.setCartItem(newOrder.getCartItem());
+        oldOrder.setOrderItems(newOrder.getOrderItems());
         orderService.updateOrder(oldOrder);
 
         return ResponseEntity

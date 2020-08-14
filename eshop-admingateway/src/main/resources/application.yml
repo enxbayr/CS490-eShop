@@ -61,3 +61,8 @@ zuul:
       path: /promotions/**
       service-id: admin-service
       strip-prefix: false
+  # Payment Module
+    payment:
+      path: /card/**
+      service-id: payment-service
+      strip-prefix: false

@@ -2,6 +2,7 @@ package edu.miu.eshop.bankapi.domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -63,5 +64,10 @@ public class TransactionHist {
 	public void setResponse(boolean response) {
 		this.response = response;
 	}
-
+	public Month getMonth() {
+		return date.getMonth();
+	}
+	public Double getTransactionAmount() {
+		return transaction.getAmount();
+	}
 }

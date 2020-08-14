@@ -3,6 +3,7 @@ package edu.miu.eshop.eshopadmin.service;
 // EB
 
 import edu.miu.eshop.eshopadmin.domain.Dto.BankCardDto;
+import edu.miu.eshop.eshopadmin.domain.Dto.BooleanDto;
 import edu.miu.eshop.eshopadmin.domain.Dto.VendorDto;
 import edu.miu.eshop.eshopadmin.domain.Vendor;
 import edu.miu.eshop.eshopadmin.exception.EmailAlreadyExistException;
@@ -32,4 +33,6 @@ public interface VendorService {
     void removeCard(String vendorId, BankCardDto bankCardDto);
 
     void resetPassword(String vendorId, String password);
+
+    BooleanDto oneTimePayment(String vendorId, BankCardDto bankCard);
 }

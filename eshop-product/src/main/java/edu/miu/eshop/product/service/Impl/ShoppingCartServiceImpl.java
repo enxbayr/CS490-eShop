@@ -20,9 +20,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private ShoppingCartRepository shoppingCartRepository ;
 
     @Override
-    public void createNewCart(String userName) {
+    public ShoppingCart createNewCart(String userName) {
         ShoppingCart cart = new ShoppingCart(userName);
-        shoppingCartRepository.save(cart);
+        return shoppingCartRepository.save(cart);
     }
 
     @Override
@@ -37,14 +37,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void addCartItem(ProductDto product,  ShoppingCart cart, int quantity) {
-         List<CartItem>  cartItems =  cart.getCartItems();
-         boolean exists = cartItems.stream().anyMatch(i->i.getProductId().equals(product.getProductId()));
+        List<CartItem>  cartItems =  cart.getCartItems();
+        boolean exists = cartItems.stream().anyMatch(i->i.getProductId().equals(product.getProductId()));
         if(exists) {
             cart.getCartItems().stream().filter(i->i.getProductId().equals(product.getProductId()))
-                                        .forEach(i->{
-                                                              i.setQuantity(i.getQuantity()+quantity);  });
+                    .forEach(i->{
+                        i.setQuantity(i.getQuantity()+quantity);  });
         }else
-            cart.addItem(product.getProductId(), product.getProductName(), product.getPrice(), quantity);
+            cart.addItem(product.getProductId(), quantity, product.getPrice(), product.getVendorId());
         shoppingCartRepository.save(cart);
     }
 

@@ -28,7 +28,7 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public Card getCard(BigInteger cardnumber) {
+	public Card getCard(String cardnumber) {
 		Optional<Card> card = repository.findById(cardnumber);
 		return card.orElse(null);
 	}

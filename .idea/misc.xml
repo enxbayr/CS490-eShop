@@ -26,6 +26,7 @@
         <option value="$PROJECT_DIR$/eshop-product/pom.xml" />
         <option value="$PROJECT_DIR$/eshop-smtp/pom.xml" />
         <option value="$PROJECT_DIR$/eshop-bankapi/pom.xml" />
+        <option value="$PROJECT_DIR$/eshop-report/pom.xml" />
       </list>
     </option>
   </component>

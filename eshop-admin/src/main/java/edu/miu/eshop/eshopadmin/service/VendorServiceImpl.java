@@ -2,11 +2,11 @@ package edu.miu.eshop.eshopadmin.service;
 
 // EB
 
+import edu.miu.eshop.eshopadmin.domain.*;
 import edu.miu.eshop.eshopadmin.domain.Dto.BankCardDto;
+import edu.miu.eshop.eshopadmin.domain.Dto.BooleanDto;
+import edu.miu.eshop.eshopadmin.domain.Dto.TransactionDto;
 import edu.miu.eshop.eshopadmin.domain.Dto.VendorDto;
-import edu.miu.eshop.eshopadmin.domain.PersonStatus;
-import edu.miu.eshop.eshopadmin.domain.Role;
-import edu.miu.eshop.eshopadmin.domain.Vendor;
 import edu.miu.eshop.eshopadmin.exception.CustomerNotFoundException;
 import edu.miu.eshop.eshopadmin.exception.EmailAlreadyExistException;
 import edu.miu.eshop.eshopadmin.repository.VendorRepository;
@@ -18,12 +18,19 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.http.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -36,11 +43,38 @@ public class VendorServiceImpl implements VendorService {
 
     private final MongoTemplate mongoTemplate;
 
+    private final RestTemplate restTemplate;
+
+    HttpHeaders headers;
+    Properties prop;
+    InputStream inputStream;
+    String propFileName = "application.properties";
+
+    @PostConstruct
+    private void initProperty() throws IOException {
+
+        prop = new Properties();
+        headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+
+        if (inputStream != null) {
+            prop.load(inputStream);
+        } else {
+            try {
+                throw new FileNotFoundException("Property file '" + propFileName + "' not found in the classpath");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Autowired
-    public VendorServiceImpl(VendorRepository vendorRepository, BCryptPasswordEncoder passwordEncoder, MongoTemplate mongoTemplate) {
+    public VendorServiceImpl(VendorRepository vendorRepository, BCryptPasswordEncoder passwordEncoder, MongoTemplate mongoTemplate, RestTemplate restTemplate) {
         this.vendorRepository = vendorRepository;
         this.passwordEncoder = passwordEncoder;
         this.mongoTemplate = mongoTemplate;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -88,6 +122,7 @@ public class VendorServiceImpl implements VendorService {
         newVendor.setPassword(encodePassword(registrationRequest.getPassword()));
         newVendor.setCreatedDate(LocalDate.now());
         newVendor.setRole(Role.ROLE_VENDOR);
+        newVendor.setStatus(PersonStatus.NEW);
         newVendor.setPersonId(IdGenerator.getTimeStamp("VE"));
         vendorRepository.save(newVendor);
         Vendor addedVendor = vendorRepository.findByUsername(newVendor.getUsername()).get();
@@ -128,6 +163,26 @@ public class VendorServiceImpl implements VendorService {
         Vendor vendor = findById(vendorId);
         vendor.setPassword(encodePassword(password));
         save(vendor);
+    }
+
+    @Override
+    public BooleanDto oneTimePayment(String vendorId, BankCardDto bankCard) {
+        double amount = Double.parseDouble(prop.getProperty("onetimePaymentAmount"));
+        Vendor vendor = findById(vendorId);
+        HttpHeaders headersPay = new HttpHeaders();
+        headersPay.setContentType(MediaType.APPLICATION_JSON);
+
+        String urlPay =  prop.getProperty("url.payment.service") + prop.getProperty("url.payment.pay");
+        HttpEntity paymentEntity = new HttpEntity(new Transaction(Card.build(bankCard, vendor.getAddress()), amount), headersPay);
+        BooleanDto result = restTemplate.exchange(urlPay,
+                HttpMethod.POST,
+                paymentEntity,
+                BooleanDto.class).getBody();
+        if(result.isBool()) {
+            vendor.setStatus(PersonStatus.ACTIVE);
+            vendorRepository.save(vendor);
+        }
+        return result;
     }
 
     private String encodePassword(String password) {

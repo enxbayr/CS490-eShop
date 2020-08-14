@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import edu.miu.eshop.bankapi.domain.Card;
 
 @Repository
-public interface CardRepository extends MongoRepository<Card, BigInteger>
+public interface CardRepository extends MongoRepository<Card, String>
 {
 
 }

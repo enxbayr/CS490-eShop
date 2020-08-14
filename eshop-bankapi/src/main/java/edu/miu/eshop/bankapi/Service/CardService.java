@@ -11,7 +11,7 @@ import edu.miu.eshop.bankapi.domain.Card;
 public interface CardService {
 	
 	public void addCard(Card card);
-	public Card getCard(BigInteger cardnumber);
+	public Card getCard(String cardnumber);
 	public List<Card> getAllCards();
 	public boolean validateDate(int year, int month);
 	public boolean validateCVV(int cvv);

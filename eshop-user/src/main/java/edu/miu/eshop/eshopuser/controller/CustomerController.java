@@ -53,12 +53,12 @@ public class CustomerController {
 //        }
 //    }
     // -- Related to the BANK CARD --
-    @GetMapping("/{customerId}/cards")
+    @GetMapping("/cards/{customerId}")
     public Set<BankCardDto> getCards(@PathVariable("customerId") String customerId){
         return customerService.findById(customerId).getCards();
     }
 
-    @PatchMapping("/{customerId}/addedcard")
+    @PostMapping("/cards/{customerId}")
     public void addCard(@PathVariable("customerId") String customerId, @RequestBody BankCardDto bankCardDto){
         try {
             Customer customer = customerService.findById(customerId);
@@ -69,7 +69,7 @@ public class CustomerController {
         }
     }
 
-    @PatchMapping("/{customerId}/removedcard")
+    @DeleteMapping("/cards/{customerId}")
     public void removeCard(@PathVariable("customerId") String customerId, @RequestBody BankCardDto bankCardDto){
         customerService.removeCard(customerId, bankCardDto);
     }

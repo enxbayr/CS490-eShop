@@ -22,4 +22,7 @@ public interface EmployeeRepository extends MongoRepository<Employee, String> {
 
     @Query("{role : {$eq : ?0}}")
     List<Employee> findByRoleQuery(Role roleEngineer);
+
+    @Query("{role : {$ne : ROLE_VENDOR}}")
+    List<Employee> findAll();
 }

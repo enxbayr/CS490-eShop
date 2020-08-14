@@ -1,36 +1,16 @@
 package edu.miu.eshop.bankapi.domain;
 
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Setter
+@Getter
+@ToString
 @Document
 public class Transaction {
-
 	private Card card;
 	private double amount;
-
-	public Transaction(Card card, double amount, String id) {
-		this.card = card;
-		this.amount = amount;
-	}
-
-	public Transaction() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Card getCard() {
-		return card;
-	}
-
-	public void setCard(Card card) {
-		this.card = card;
-	}
-
-	public double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
-
 }

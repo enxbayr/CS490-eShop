@@ -1,8 +1,9 @@
 package edu.miu.eshop.product.service.Impl;
 
-import edu.miu.eshop.product.api.client.Email;
 import edu.miu.eshop.product.constants.TaxRate;
+import edu.miu.eshop.product.dto.BooleanDto;
 import edu.miu.eshop.product.dto.CustomerDto;
+import edu.miu.eshop.product.dto.EmailDto;
 import edu.miu.eshop.product.dto.TransactionDto;
 import edu.miu.eshop.product.entity.*;
 import edu.miu.eshop.product.repository.OrderRepository;
@@ -43,43 +44,56 @@ public class OrderServiceImpl implements OrderService {
     @Value("${url.user.service}")
     private String URI_USER_SERVICE ;
     @Value("${path.user.id}")
-    private String  PATH_USER_GET ;
+    private String  PATH_USER_GET;
 
     @Value("${url.payment.service}")
     private String URI_PAYMENT_SERVICE;
     @Value("${url.payment.pay}")
     private String PATH_PAYMENT_PAY;
 
+    @Value("${url.vendor.service}")
+    private String URI_VENDOR_SERVICE;
+    @Value("${url.vendor.pay}")
+    private String PATH_VENDOR_EMAIL;
+
     @Value("${admin.token}")
     private String  token ;
+
+
     public void createOrder(ShoppingCart cart, String userName) {
-        System.out.println(cart);
+        Order order = new Order();
+        double totalCost = calculateCost(cart);
+        order.setTotalCost(totalCost);
+        order.setOrderDate(LocalDateTime.now());
+        order.setUserName(userName);
+        order.setOrderNumber(generateOrderNumber());
+
         cart.getCartItems().forEach(
                 cartItem -> {
-                    Order order = new Order();
-                    double totalCost = calculateCost(cartItem);
-                    order.setTotalCost(totalCost);
-                    order.setOrderDate(LocalDateTime.now());
-                    order.setUserName(userName);
-                    order.setOrderNumber(generateOrderNumber());
-                    orderRepository.save(order);
+                    order.addOrderItem(cartItem);
                 }
         );
+        orderRepository.save(order);
+
     }
 
     @Override
     public void createGuestOrder(List<CartItem> orderItems, String email) {
+        ShoppingCart guestCart = new ShoppingCart();
+        guestCart.setCartItems(orderItems);
+        Order order = new Order();
+        double totalCost = calculateCost(guestCart);
+        order.setTotalCost(totalCost);
+        order.setOrderDate(LocalDateTime.now());
+        order.setOrderNumber(generateOrderNumber());
+        order.setUserName(email);
+
         orderItems.forEach(
-                cartItem -> {
-                    Order order = new Order();
-                    double totalCost = calculateCost(cartItem);
-                    order.setTotalCost(totalCost);
-                    order.setOrderDate(LocalDateTime.now());
-                    order.setUserName(email);
-                    order.setOrderNumber(generateOrderNumber());
-                    orderRepository.save(order);
+                cartItem -> {    order.addOrderItem(cartItem);
                 }
         );
+        orderRepository.save(order);
+
     }
 
     @Override
@@ -88,8 +102,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllOrders(String userName) {
-        return orderRepository.findAllByUserName (userName);
+    public List<Order> getAllOrders(String customerId) {
+        return orderRepository.findAllByCustomerId( customerId);
     }
 
 
@@ -108,19 +122,17 @@ public class OrderServiceImpl implements OrderService {
         //FIND ALL PENDING ORDERS FOR THE CUSTOMER
         Order order = getOrder(orderNumber);
         String customerId = order.getCustomerId();
-        //String vendorId = order.getVendorId
-
         // CALL PAYMENT MODULE
         RestTemplate rPay = new RestTemplate();
         HttpHeaders headersPay = new HttpHeaders();
         headersPay.setContentType(MediaType.APPLICATION_JSON);
-
+        TransactionDto transactional = new TransactionDto(paymentCard, order.getTotalCost());
         String urlPay =  URI_PAYMENT_SERVICE +  PATH_PAYMENT_PAY;
-        HttpEntity paymentEntity = new HttpEntity(new TransactionDto(paymentCard, order.getTotalCost()), headersPay);
-        ResponseEntity<Boolean> paymentOk =   rPay.exchange(urlPay,
+        HttpEntity paymentEntity = new HttpEntity(transactional, headersPay);
+        BooleanDto paymentOk =   rPay.exchange(urlPay,
                 HttpMethod.POST,
                 paymentEntity,
-                Boolean.class);
+                BooleanDto.class).getBody();
 
         // CONNECT TO CUSTOMER MODULE
         RestTemplate rCus = new RestTemplate();
@@ -133,42 +145,51 @@ public class OrderServiceImpl implements OrderService {
                 customerEntity,
                 CustomerDto.class).getBody();
 
-        //SEND EMAIL TO CUSTOMER
-        RestTemplate rVen = new RestTemplate();
-        headers.set("Authorization", "Bearer " + token);
-        HttpEntity<String> vendorEntity = new HttpEntity<>(headers);
-//        String urlVendor =  URI_VENDOR_SERVICE +  PATH_VENDOR_GET;
-//        VendorDto vendorDto =   rCus.exchange(urlVendor + "/" +vendorId,
-//                HttpMethod.GET,
-//                customerEntity,
-//                VendorDto.class).getBody();
-//        sendEmailToVendor(vendorDto, order);
-
         // SEND EMAIL TO VENDOR
         sendEmailToCustomer(customerDto, order);
-        //STORE ORDER DETAIL
-        sendEmailToVendor(order);
 
+        //RETRIEVE EACH VENDOR AND  SEND EMAIL
+        RestTemplate rVen = new RestTemplate();
+        HttpHeaders headersVendor = new HttpHeaders();
+
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> vendorEntity = new HttpEntity<>(headersVendor);
+
+        order.getOrderItems().stream().forEach( orderItem -> {
+                    String urlVendor =  URI_VENDOR_SERVICE +  PATH_VENDOR_EMAIL;
+
+                    EmailDto emailDto =   rVen.exchange(urlVendor + "/" + orderItem.getVendorId(),
+                            HttpMethod.GET,
+                            vendorEntity,
+                            EmailDto.class).getBody();
+                    sendEmailToVendor(emailDto.getEmail(), order);
+                }
+        );
+
+        //STORE ORDER DETAIL
     }
 
-    private double calculateCost(CartItem item) {
+    private double calculateCost(ShoppingCart cart) {
+        int totalCost = 0;
+        for (CartItem item : cart.getCartItems()){
+            Product product = productRepository.findByProductId(item.getProductId());
+            List<Promotion> promotions = promotionRepository.findByProductId(item.getProductId());
+            if (promotions.size() > 0) {
 
-        Product product = productRepository.findByProductId(item.getProductId());
-        List<Promotion> promotions = promotionRepository.findByProductId(item.getProductId());
-        if(promotions.size()>0){
-
-            promotions.stream()
-                    .map(pro->pro.getPromotionPercentage())
-                    .forEach(
-                            p -> {
-                                if ( p > 0) {
-                                    promotion +=  item.getUnitCost() * p;
+                promotions.stream()
+                        .map(pro -> pro.getPromotionPercentage())
+                        .forEach(
+                                p -> {
+                                    if (p > 0) {
+                                        promotion += item.getUnitCost() * p;
+                                    }
                                 }
-                            }
-                    );
-        }
+                        );
+            }
+            totalCost+= item.getQuantity()*(item.getUnitCost()-promotion);
 
-        return item.getQuantity()*(item.getUnitCost()-promotion)* TaxRate.TAX_RATE.getStateTax();
+        }
+        return  totalCost + totalCost*TaxRate.TAX_RATE.getStateTax();
     }
 
     //generate order number of length 15
@@ -194,7 +215,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private HttpEntity prepareEmail( String [] receivers,  String subject, String body, String [] attachmentsPath){
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         Email email = new Email();
@@ -219,8 +239,9 @@ public class OrderServiceImpl implements OrderService {
         restTemplate.postForObject(URI_EMAIL_SERVICE + PATH_EMAIL_SEND,  cusEmailEntity, String.class);
     }
 
-    private  void  sendEmailToVendor(Order order){ // VENDOR EMAIL INCLUDE
-        String [] recipientsVendor = {"springmukera@gmail.com"};
+    private  void  sendEmailToVendor(String vendorEmail, Order order){
+        String [] recipientsVendor = {vendorEmail};
+        System.out.println("sendEmailToVendor : "+recipientsVendor[0]);
         String vendorSubject = "Your Order From eshop";
         String [] VendorAttachmentsPath = {"src/main/resources/attachments/testAttachment.txt"};
         String messageVendor = "New order! New order is placed /n" +
@@ -228,9 +249,9 @@ public class OrderServiceImpl implements OrderService {
                 "Total price: " + order.getTotalCost() + " /n" +
                 "Date: " + order.getOrderDate() + " /n" ;
 
+        System.out.println("The path is :"+ URI_EMAIL_SERVICE + PATH_EMAIL_SEND);
         HttpEntity<?> venEmailEntity = prepareEmail(recipientsVendor,vendorSubject,messageVendor,VendorAttachmentsPath);
         restTemplate.postForObject(URI_EMAIL_SERVICE + PATH_EMAIL_SEND,  venEmailEntity, String.class);
     }
-
 }
 

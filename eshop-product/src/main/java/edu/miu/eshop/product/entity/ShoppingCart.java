@@ -21,16 +21,15 @@ public class ShoppingCart {
     @Id
     private String id;
     // OneToMany --- the one side owns the relationship
-    private List<CartItem> cartItems ;
-    @Indexed(unique = true)
+    private List<CartItem> cartItems = new ArrayList<>( );
     private String userName;
 
     public ShoppingCart(String userName){
         this.userName = userName;
         cartItems = new ArrayList<>();
     }
-    public void addItem( String productId, String name, double unitCost, int quantity) {
-        CartItem item = new CartItem( productId,  name, unitCost, quantity);
+    public void addItem( String productId, int  quantity, double unitCost, String vendorId) {
+        CartItem item = new CartItem( productId,   quantity, unitCost, vendorId, userName);
         cartItems.add(item);
     }
 }

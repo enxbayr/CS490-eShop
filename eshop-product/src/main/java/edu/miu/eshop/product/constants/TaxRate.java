@@ -6,7 +6,7 @@ public enum TaxRate{
 
     private double  stateTax;
 
-     TaxRate(double  stateTax) {
+    TaxRate(double  stateTax) {
 
         this.stateTax = stateTax;
     }

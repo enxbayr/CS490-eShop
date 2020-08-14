@@ -8,7 +8,10 @@ import edu.miu.eshop.bankapi.domain.Transaction;
 import edu.miu.eshop.bankapi.domain.TransactionHist;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class TransactionHistServiceImpl implements TransactionHistService {
@@ -40,6 +43,25 @@ public class TransactionHistServiceImpl implements TransactionHistService {
 			}
 		}
 		return totalAmount;
+	}
+
+	@Override
+	public double getTotalTransactionAmt() {
+		List<TransactionHist> transaction = getAllTransactionHist();
+		double totalAmount = 0.0;
+		for (TransactionHist trans : transaction) {
+			totalAmount += trans.getTransaction().getAmount();
+		}
+		return totalAmount;
+	}
+
+	@Override
+	public Map<Month, Double> getTransactionByMonth(int year) {
+		//List<TransactionHist> transaction = getAllTransactionHist();
+		List<TransactionHist> alltransactiions = repository.findAll();
+
+		return alltransactiions.stream().collect(
+				Collectors.groupingBy(TransactionHist::getMonth, Collectors.summingDouble(TransactionHist::getTransactionAmount)));//.summingDouble(TransactionHist::getTransaction))
 	}
 
 }

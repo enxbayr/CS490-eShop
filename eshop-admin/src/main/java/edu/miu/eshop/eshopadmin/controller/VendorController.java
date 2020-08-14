@@ -2,15 +2,13 @@ package edu.miu.eshop.eshopadmin.controller;
 
 // EB
 
-import edu.miu.eshop.eshopadmin.domain.Dto.BankCardDto;
-import edu.miu.eshop.eshopadmin.domain.Dto.EmailDto;
-import edu.miu.eshop.eshopadmin.domain.Dto.PasswordDto;
-import edu.miu.eshop.eshopadmin.domain.Dto.VendorDto;
+import edu.miu.eshop.eshopadmin.domain.Dto.*;
 import edu.miu.eshop.eshopadmin.domain.Vendor;
 import edu.miu.eshop.eshopadmin.exception.CustomerNotFoundException;
 import edu.miu.eshop.eshopadmin.service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -47,12 +45,12 @@ public class VendorController {
     }
 
     // -- Related to the BANK CARD --
-    @GetMapping("/{vendorId}/cards")
+    @GetMapping("/cards/{vendorId}")
     public Set<BankCardDto> getCards(@PathVariable("vendorId") String vendorId){
         return vendorService.findById(vendorId).getCards();
     }
 
-    @PatchMapping("/{vendorId}/addedcard")
+    @PostMapping("/cards/{vendorId}")
     public void addCard(@PathVariable("vendorId") String vendorId, @RequestBody BankCardDto bankCardDto){
         try {
             Vendor vendor = vendorService.findById(vendorId);
@@ -63,7 +61,7 @@ public class VendorController {
         }
     }
 
-    @PatchMapping("/{vendorId}/removedcard")
+    @DeleteMapping("/cards/{vendorId}")
     public void removeCard(@PathVariable("vendorId") String vendorId, @RequestBody BankCardDto bankCardDto){
         vendorService.removeCard(vendorId, bankCardDto);
     }
@@ -85,7 +83,12 @@ public class VendorController {
     }
 
     @GetMapping("/email/{vendorId}")
-    private EmailDto getEmail(@PathVariable String vendorId){
+    public EmailDto getEmail(@PathVariable String vendorId){
         return EmailDto.build(vendorService.findById(vendorId));
+    }
+
+    @PostMapping("/onetimepayment/{vendorId}")
+    public ResponseEntity<BooleanDto> oneTimePayment(@PathVariable String vendorId, @RequestBody BankCardDto bankCard ){
+        return new ResponseEntity<>(vendorService.oneTimePayment(vendorId, bankCard), HttpStatus.OK);
     }
 }
