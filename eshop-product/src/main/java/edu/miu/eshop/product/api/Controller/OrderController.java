@@ -1,8 +1,8 @@
 package edu.miu.eshop.product.api.Controller;
 
+import edu.miu.eshop.product.dto.CheckoutDto;
 import edu.miu.eshop.product.dto.GuestCustomerDto;
 import edu.miu.eshop.product.dto.UserNameDto;
-import edu.miu.eshop.product.entity.Card;
 import edu.miu.eshop.product.entity.Order;
 import edu.miu.eshop.product.entity.Customer;
 import edu.miu.eshop.product.entity.ShoppingCart;
@@ -48,21 +48,20 @@ public class OrderController {
                 .body( orderService.getAllOrders(customerId));
     }
 
-    @GetMapping("order/{orderNumber}")
+    @GetMapping("/order/{orderNumber}")
     public Order getOrder(@PathVariable("orderNumber") String orderNumber){
         return orderService.getOrder(orderNumber);
     }
 
     //CHECKOUT and CONFIRM PAYMENT
-    @PostMapping("/checkout/{orderNumber}")
-    public ResponseEntity checkout(@PathVariable("orderNumber") String orderNumber, @RequestBody Card paymentCard){
-
-        orderService.checkout(orderNumber, paymentCard);
+    @PostMapping("/checkout")
+    public ResponseEntity checkout(@RequestBody CheckoutDto checkoutDto){
+        orderService.checkout(checkoutDto.getCustomerId(), checkoutDto);
 
         return ResponseEntity.ok().body("Order checkout is successfully.");
     }
 
-    @PostMapping("guestcheckout")
+    @PostMapping("/guestcheckout")
     public ResponseEntity<?> guestCheckout(@RequestBody GuestCustomerDto guestCustomerDto){
 
         orderService.createGuestOrder(guestCustomerDto.getOrderItems(), guestCustomerDto.getEmail());
@@ -70,7 +69,7 @@ public class OrderController {
     }
 
     //UPDATE ORDER
-    @PatchMapping("update/{orderNumber}")
+    @PatchMapping("/update/{orderNumber}")
     public ResponseEntity<?> updateOrder(@PathVariable("orderNumber") String orderNumber,@RequestBody @Valid Order newOrder){
 
         Order oldOrder = orderService.getOrder(orderNumber);
@@ -86,7 +85,7 @@ public class OrderController {
     }
 
     //DELETE ORDER
-    @DeleteMapping("delete/{orderNumber}")
+    @DeleteMapping("/delete/{orderNumber}")
     public ResponseEntity<?> deleteOrder(@PathVariable("orderNumber") String orderNumber){
 
         orderService.deleteOrder(orderNumber);

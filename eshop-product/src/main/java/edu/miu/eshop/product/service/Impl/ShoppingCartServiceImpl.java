@@ -27,7 +27,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart findCartForUser(String userName) {
-        return shoppingCartRepository.findByUserName(userName);
+        return shoppingCartRepository.findByUserName(userName).orElse(null);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         if(exists) {
             cart.getCartItems().stream().filter(i->i.getProductId().equals(product.getProductId()))
                     .forEach(i->{
-                        i.setQuantity(i.getQuantity()+quantity);  });
+                        i.setQuantity(quantity);  });
         }else
             cart.addItem(product.getProductId(), quantity, product.getPrice(), product.getVendorId());
         shoppingCartRepository.save(cart);

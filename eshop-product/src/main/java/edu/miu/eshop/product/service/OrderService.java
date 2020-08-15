@@ -1,11 +1,12 @@
 package edu.miu.eshop.product.service;
 
+import edu.miu.eshop.product.dto.CheckoutDto;
 import edu.miu.eshop.product.entity.*;
 
 import java.util.List;
 
 public interface OrderService {
-    void createOrder(ShoppingCart cart, String userName);
+    Order createOrder(ShoppingCart cart, String userName);
     void createGuestOrder(List<CartItem> items, String email);
 
     Order getOrder(String orderNumber);
@@ -16,5 +17,5 @@ public interface OrderService {
 
     void deleteOrder(String orderNumber);
 
-    void checkout(String orderNumber, Card paymentCard);
+    void checkout(String orderNumber, CheckoutDto checkoutDto);
 }

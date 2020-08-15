@@ -23,7 +23,7 @@ public class Card {
                 bankCardDto.getCardNumber(),
                 Integer.parseInt(bankCardDto.getCvv()),
                 bankCardDto.getHolderName(),
-                bankCardDto.getExpirationDate().getDayOfMonth(),
+                bankCardDto.getExpirationDate().getMonth().getValue(),
                 bankCardDto.getExpirationDate().getYear(),
                 addressDto.getStreet() + " " +  addressDto.getCity() + " " +  addressDto.getState() + " " +  addressDto.getZip());
     }

@@ -1,14 +1,12 @@
 package edu.miu.eshop.product.service.Impl;
 
 import edu.miu.eshop.product.constants.TaxRate;
-import edu.miu.eshop.product.dto.BooleanDto;
-import edu.miu.eshop.product.dto.CustomerDto;
-import edu.miu.eshop.product.dto.EmailDto;
-import edu.miu.eshop.product.dto.TransactionDto;
+import edu.miu.eshop.product.dto.*;
 import edu.miu.eshop.product.entity.*;
 import edu.miu.eshop.product.repository.OrderRepository;
 import edu.miu.eshop.product.repository.ProductRepository;
 import edu.miu.eshop.product.repository.PromotionRepository;
+import edu.miu.eshop.product.repository.ShoppingCartRepository;
 import edu.miu.eshop.product.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +28,9 @@ public class OrderServiceImpl implements OrderService {
     private ProductRepository productRepository;
     @Autowired
     private PromotionRepository promotionRepository;
+
+    @Autowired
+    private ShoppingCartRepository shoppingCartRepository;
 
     private  double promotion;
 
@@ -58,11 +59,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Value("${admin.token}")
     private String  token ;
+    private String paymentSuccess;
+    private double totalCost;
 
-
-    public void createOrder(ShoppingCart cart, String userName) {
+    public Order createOrder(ShoppingCart cart, String userName) {
         Order order = new Order();
-        double totalCost = calculateCost(cart);
         order.setTotalCost(totalCost);
         order.setOrderDate(LocalDateTime.now());
         order.setUserName(userName);
@@ -73,8 +74,7 @@ public class OrderServiceImpl implements OrderService {
                     order.addOrderItem(cartItem);
                 }
         );
-        orderRepository.save(order);
-
+        return orderRepository.save(order);
     }
 
     @Override
@@ -118,21 +118,26 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void checkout(String orderNumber, Card paymentCard) {
-        //FIND ALL PENDING ORDERS FOR THE CUSTOMER
-        Order order = getOrder(orderNumber);
-        String customerId = order.getCustomerId();
+    public void checkout(String customerI, CheckoutDto checkoutDto) {
+        ShoppingCart cart = shoppingCartRepository.findByCustomerId(customerI);
+        totalCost = this.calculateCost(cart);
+        String customerId = cart.getCustomerId();
+
         // CALL PAYMENT MODULE
         RestTemplate rPay = new RestTemplate();
         HttpHeaders headersPay = new HttpHeaders();
         headersPay.setContentType(MediaType.APPLICATION_JSON);
-        TransactionDto transactional = new TransactionDto(paymentCard, order.getTotalCost());
+        TransactionDto transactional = new TransactionDto(Card.build(checkoutDto), totalCost);
         String urlPay =  URI_PAYMENT_SERVICE +  PATH_PAYMENT_PAY;
         HttpEntity paymentEntity = new HttpEntity(transactional, headersPay);
         BooleanDto paymentOk =   rPay.exchange(urlPay,
                 HttpMethod.POST,
                 paymentEntity,
                 BooleanDto.class).getBody();
+
+        paymentSuccess = paymentOk.isBool()?"Successful":"Failed";
+        if(paymentOk.isBool()) return;
+        Order order = createOrder(cart, cart.getUserName());
 
         // CONNECT TO CUSTOMER MODULE
         RestTemplate rCus = new RestTemplate();
@@ -158,15 +163,13 @@ public class OrderServiceImpl implements OrderService {
         order.getOrderItems().stream().forEach( orderItem -> {
                     String urlVendor =  URI_VENDOR_SERVICE +  PATH_VENDOR_EMAIL;
 
-                    EmailDto emailDto =   rVen.exchange(urlVendor + "/" + orderItem.getVendorId(),
+                    EmailDto  emailDto =   rVen.exchange(urlVendor + "/" + orderItem.getVendorId(),
                             HttpMethod.GET,
                             vendorEntity,
                             EmailDto.class).getBody();
                     sendEmailToVendor(emailDto.getEmail(), order);
                 }
         );
-
-        //STORE ORDER DETAIL
     }
 
     private double calculateCost(ShoppingCart cart) {

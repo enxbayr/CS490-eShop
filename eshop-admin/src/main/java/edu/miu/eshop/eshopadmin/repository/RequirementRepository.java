@@ -10,9 +10,9 @@ import java.util.List;
 @Repository
 public interface RequirementRepository extends MongoRepository<Requirement, String> {
 
-    @Query("{status : {$ne : DELETED}}")
+    @Query("{status : {$ne : DELETED}, vendorId : {$eq : ?0}}")
     List<Requirement> findByVendorId(String vendorId);
 
-    @Query("{status : {$ne : DELETED}}")
+    @Query("{status : {$ne : DELETED}, engineer : {$eq : ?0}}")
     List<Requirement> findByEngineerId(String engineerId);
 }

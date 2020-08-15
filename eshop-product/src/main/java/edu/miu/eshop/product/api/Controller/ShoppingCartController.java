@@ -26,20 +26,31 @@ public class ShoppingCartController {
     private RestTemplate restTemplate;
 
     @PostMapping("/create")
-    public ResponseEntity  createCart(@RequestBody ShoppingCart shoppingCart){
+    public ResponseEntity createCart(@RequestBody ShoppingCart shoppingCart) {
 
-        String user = shoppingCart.getUserName();
+        String userName = shoppingCart.getUserName();
+        ShoppingCart cart = shoppingCartService.findCartForUser(userName);
 
         //CREATE THE CART
-        ShoppingCart cart = shoppingCartService.createNewCart(user);
+        if (cart == null) {
+            cart = shoppingCartService.createNewCart(userName);
+
+        }
+
+        cart.setCartItems(shoppingCart.getCartItems());
+        cart.setCustomerId(shoppingCart.getCustomerId());
+        cart.setUserName(shoppingCart.getUserName());
 
         //ADD TO THE CART
-        for (CartItem item:shoppingCart.getCartItems()) {
+        for (CartItem item : shoppingCart.getCartItems()) {
 
             ProductDto product = productService.getProduct(item.getProductId());
-
             if (product == null) ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
-            shoppingCartService.addCartItem(product, cart, item.getQuantity());
+            else {
+                // update quntity
+                shoppingCartService.addCartItem(product, cart, item.getQuantity());
+            }
+
         }
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -48,66 +59,66 @@ public class ShoppingCartController {
 
     //ADD PRODUCT, ALSO UPDATES QUANTITY
     @PostMapping("cartitem/add")
-    public ResponseEntity addCartItem(@RequestBody CartItemDto cartItemDto){
+    public ResponseEntity addCartItem(@RequestBody CartItemDto cartItemDto) {
         ShoppingCart cart = shoppingCartService.findCartForUser(cartItemDto.getUserName());
-        ProductDto product  = productService.getProduct(cartItemDto.getProductId());
+        ProductDto product = productService.getProduct(cartItemDto.getProductId());
 
-        if(product==null)  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
-        boolean exists = cart.getCartItems().stream().anyMatch(i->i.getProductId().equals(cartItemDto.getProductId()));
+        if (product == null) ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
+        boolean exists = cart.getCartItems().stream().anyMatch(i -> i.getProductId().equals(cartItemDto.getProductId()));
 
-        if(cart!=null&&product!=null){
+        if (cart != null && product != null) {
 
-                    shoppingCartService.addCartItem(product, cart, cartItemDto.getQuantity());
-        }else{
-           return ResponseEntity
+            shoppingCartService.addCartItem(product, cart, cartItemDto.getQuantity());
+        } else {
+            return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("Cart not found");
         }
-        return   ResponseEntity
+        return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(cart);
     }
 
     //READ
     @GetMapping("/cartitem/{productid}/{userName}")
-    public ResponseEntity getCartItem(@PathVariable("productid") String productid , @PathVariable String userName){
-        ShoppingCart cart  = shoppingCartService.findCartForUser(userName);
-        if(cart==null) ResponseEntity.status(HttpStatus.NOT_FOUND). body("Cart not found");
+    public ResponseEntity getCartItem(@PathVariable("productid") String productid, @PathVariable String userName) {
+        ShoppingCart cart = shoppingCartService.findCartForUser(userName);
+        if (cart == null) ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cart not found");
         //if(productService.getProduct(productid)==null) ResponseEntity.status(HttpStatus.NOT_FOUND). body("Product not found");
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(cart.getCartItems().stream().filter(i->i.getProductId().equals(productid)).findFirst().orElse( null));
+                .body(cart.getCartItems().stream().filter(i -> i.getProductId().equals(productid)).findFirst().orElse(null));
     }
 
     //UPDATE PRODUCT QUANTITY
     @PutMapping("cartitem/updatequantity/{productid}/{quantity}")
-    public ResponseEntity updateQuantity(@RequestBody ShoppingCartDto shoppingCartDto, @PathVariable String productid, @PathVariable int quantity){
-        ShoppingCart cart  = shoppingCartService.findCartForUser(shoppingCartDto.getUserName());
+    public ResponseEntity updateQuantity(@RequestBody ShoppingCartDto shoppingCartDto, @PathVariable String productid, @PathVariable int quantity) {
+        ShoppingCart cart = shoppingCartService.findCartForUser(shoppingCartDto.getUserName());
         shoppingCartService.setProductQuantity(cart, productid, quantity);
-        return  ResponseEntity
+        return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(cart);
     }
 
     //REMOVE PRODUCT
     @DeleteMapping("/cartitem/delete")
-    public ResponseEntity removeItem(@RequestBody ShoppingCartDto shoppingCartDto){
+    public ResponseEntity removeItem(@RequestBody ShoppingCartDto shoppingCartDto) {
         ShoppingCart cart = shoppingCartService.findCartForUser(shoppingCartDto.getUserName());
-        shoppingCartService.removeItem(cart,shoppingCartDto.getCartItem().getProductId());
-        return  ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(cart.getCartItems());
+        shoppingCartService.removeItem(cart, shoppingCartDto.getCartItem().getProductId());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(cart.getCartItems());
     }
 
     //READ
     @GetMapping("/{userName}")
-    public ResponseEntity getCartItems(@PathVariable String userName){
+    public ResponseEntity getCartItems(@PathVariable String userName) {
         ShoppingCart cart = shoppingCartService.findCartForUser(userName);
-        if(cart==null)
-            return  ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body("Cart is empty");
-        return  ResponseEntity
+        if (cart == null)
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Cart is empty");
+        return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(cart.getCartItems());
     }
