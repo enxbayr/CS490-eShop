@@ -1,6 +1,5 @@
 package edu.miu.eshop.product.dto;
 
-import edu.miu.eshop.product.entity.Card;
 import lombok.*;
 
 

@@ -53,6 +53,7 @@ public class CardController {
 
     @PostMapping("/process")
     public ResponseEntity<BooleanDto> processTransaction(@RequestBody Transaction transaction) {
+        System.out.println("CARD CONTROLLER BANK: " + transaction);
         RestTemplate restTemplate = new RestTemplate();
         String cardnumber = transaction.getCard().getCardNumber();
         String cardtype = service.getCardType(cardnumber);

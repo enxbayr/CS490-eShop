@@ -2,6 +2,7 @@ package edu.miu.eshop.product.api.Controller;
 
 import edu.miu.eshop.product.dto.CheckoutDto;
 import edu.miu.eshop.product.dto.GuestCustomerDto;
+import edu.miu.eshop.product.dto.OrderItemDto;
 import edu.miu.eshop.product.dto.UserNameDto;
 import edu.miu.eshop.product.entity.Order;
 import edu.miu.eshop.product.entity.Customer;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.List;
 
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -53,11 +55,15 @@ public class OrderController {
         return orderService.getOrder(orderNumber);
     }
 
+    @GetMapping("/orderitems/{vendorId}")
+    public List<OrderItemDto> getOrderByVendor(@PathVariable("vendorId") String vendorId){
+        return orderService.getOrderByVendor(vendorId);
+    }
+
     //CHECKOUT and CONFIRM PAYMENT
     @PostMapping("/checkout")
     public ResponseEntity checkout(@RequestBody CheckoutDto checkoutDto){
-        orderService.checkout(checkoutDto.getCustomerId(), checkoutDto);
-
+        orderService.checkout(checkoutDto);
         return ResponseEntity.ok().body("Order checkout is successfully.");
     }
 

@@ -15,7 +15,6 @@ public class BankCardDto {
     private String cardNumber;
     private String holderName;
     private String bankName;
-    @JsonFormat(pattern = "MM/dd/yyyy")
     private LocalDate expirationDate;
     private String cvv;
     private boolean cardStatus = true;

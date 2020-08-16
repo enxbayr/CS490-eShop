@@ -3,10 +3,7 @@ package edu.miu.eshop.eshopadmin.service;
 // EB
 
 import edu.miu.eshop.eshopadmin.domain.*;
-import edu.miu.eshop.eshopadmin.domain.Dto.BankCardDto;
-import edu.miu.eshop.eshopadmin.domain.Dto.BooleanDto;
-import edu.miu.eshop.eshopadmin.domain.Dto.TransactionDto;
-import edu.miu.eshop.eshopadmin.domain.Dto.VendorDto;
+import edu.miu.eshop.eshopadmin.domain.Dto.*;
 import edu.miu.eshop.eshopadmin.exception.CustomerNotFoundException;
 import edu.miu.eshop.eshopadmin.exception.EmailAlreadyExistException;
 import edu.miu.eshop.eshopadmin.repository.VendorRepository;
@@ -14,6 +11,7 @@ import edu.miu.eshop.eshopadmin.security.request.RegistrationRequest;
 import edu.miu.eshop.eshopadmin.security.response.PersonResponse;
 import edu.miu.eshop.eshopadmin.utils.IdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -183,6 +181,16 @@ public class VendorServiceImpl implements VendorService {
             vendorRepository.save(vendor);
         }
         return result;
+    }
+
+    @Override
+    public List<OrderItemDto> getOrderByVendor(String vendorId) {
+        ResponseEntity<List<OrderItemDto>> response = restTemplate.exchange(
+                prop.getProperty("eshop.product.url.base") + "/orders/orderitems/" + vendorId,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<OrderItemDto>>(){});
+        return response.getBody();
     }
 
     private String encodePassword(String password) {

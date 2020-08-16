@@ -91,4 +91,9 @@ public class VendorController {
     public ResponseEntity<BooleanDto> oneTimePayment(@PathVariable String vendorId, @RequestBody BankCardDto bankCard ){
         return new ResponseEntity<>(vendorService.oneTimePayment(vendorId, bankCard), HttpStatus.OK);
     }
+
+    @GetMapping("/orderitems/{vendorId}")
+    public List<OrderItemDto> getOrderByVendor(@PathVariable("vendorId") String vendorId){
+        return vendorService.getOrderByVendor(vendorId);
+    }
 }

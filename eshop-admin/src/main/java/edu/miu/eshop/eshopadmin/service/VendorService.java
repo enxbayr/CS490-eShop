@@ -4,6 +4,7 @@ package edu.miu.eshop.eshopadmin.service;
 
 import edu.miu.eshop.eshopadmin.domain.Dto.BankCardDto;
 import edu.miu.eshop.eshopadmin.domain.Dto.BooleanDto;
+import edu.miu.eshop.eshopadmin.domain.Dto.OrderItemDto;
 import edu.miu.eshop.eshopadmin.domain.Dto.VendorDto;
 import edu.miu.eshop.eshopadmin.domain.Vendor;
 import edu.miu.eshop.eshopadmin.exception.EmailAlreadyExistException;
@@ -35,4 +36,6 @@ public interface VendorService {
     void resetPassword(String vendorId, String password);
 
     BooleanDto oneTimePayment(String vendorId, BankCardDto bankCard);
+
+    List<OrderItemDto> getOrderByVendor(String vendorId);
 }

@@ -1,6 +1,7 @@
 package edu.miu.eshop.product.service;
 
 import edu.miu.eshop.product.dto.CheckoutDto;
+import edu.miu.eshop.product.dto.OrderItemDto;
 import edu.miu.eshop.product.entity.*;
 
 import java.util.List;
@@ -17,5 +18,7 @@ public interface OrderService {
 
     void deleteOrder(String orderNumber);
 
-    void checkout(String orderNumber, CheckoutDto checkoutDto);
+    void checkout(CheckoutDto checkoutDto);
+
+    List<OrderItemDto> getOrderByVendor(String vendorId);
 }

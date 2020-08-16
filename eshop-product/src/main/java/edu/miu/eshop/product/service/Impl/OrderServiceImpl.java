@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -103,7 +104,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getAllOrders(String customerId) {
-        return orderRepository.findAllByCustomerId( customerId);
+        return orderRepository.findAllByUserName(customerId);
     }
 
 
@@ -118,8 +119,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void checkout(String customerI, CheckoutDto checkoutDto) {
-        ShoppingCart cart = shoppingCartRepository.findByCustomerId(customerI);
+    public void checkout(CheckoutDto checkoutDto) {
+        ShoppingCart cart = shoppingCartRepository.findByCustomerId(checkoutDto.getCustomerId());
         totalCost = this.calculateCost(cart);
         String customerId = cart.getCustomerId();
 
@@ -130,13 +131,16 @@ public class OrderServiceImpl implements OrderService {
         TransactionDto transactional = new TransactionDto(Card.build(checkoutDto), totalCost);
         String urlPay =  URI_PAYMENT_SERVICE +  PATH_PAYMENT_PAY;
         HttpEntity paymentEntity = new HttpEntity(transactional, headersPay);
-        BooleanDto paymentOk =   rPay.exchange(urlPay,
+        BooleanDto paymentOk = rPay.exchange(urlPay,
                 HttpMethod.POST,
                 paymentEntity,
                 BooleanDto.class).getBody();
-
         paymentSuccess = paymentOk.isBool()?"Successful":"Failed";
-        if(paymentOk.isBool()) return;
+        if(paymentOk.isBool()){
+            cart.setCartItems(new ArrayList<CartItem>());
+            shoppingCartRepository.save(cart);
+        }
+        //if(paymentOk.isBool()) return;
         Order order = createOrder(cart, cart.getUserName());
 
         // CONNECT TO CUSTOMER MODULE
@@ -172,6 +176,27 @@ public class OrderServiceImpl implements OrderService {
         );
     }
 
+    @Override
+    public List<OrderItemDto> getOrderByVendor(String vendorId) {
+        List<OrderItemDto> result = new ArrayList<>();
+        orderRepository.findAll().stream()
+                .forEach(o -> {
+                    o.getOrderItems().forEach(i -> {
+                        OrderItemDto orderItemDto = new OrderItemDto();
+                        orderItemDto.setOrderDate(o.getOrderDate());
+                        orderItemDto.setUserName(o.getUserName());
+                        orderItemDto.setCustomerId(o.getCustomerId());
+                        orderItemDto.setProductId(i.getProductId());
+                        orderItemDto.setPrice(i.getUnitCost());
+                        orderItemDto.setQuantity(i.getQuantity());
+                        orderItemDto.setVendorId(i.getVendorId());
+                        if(orderItemDto.getVendorId().equals(vendorId))
+                            result.add(orderItemDto);
+                    });
+                });
+        return result;
+    }
+
     private double calculateCost(ShoppingCart cart) {
         int totalCost = 0;
         for (CartItem item : cart.getCartItems()){
@@ -189,7 +214,7 @@ public class OrderServiceImpl implements OrderService {
                                 }
                         );
             }
-            totalCost+= item.getQuantity()*(item.getUnitCost()-promotion);
+            totalCost += item.getQuantity()*(item.getUnitCost()-promotion);
 
         }
         return  totalCost + totalCost*TaxRate.TAX_RATE.getStateTax();

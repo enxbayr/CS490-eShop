@@ -21,7 +21,7 @@ public class ShoppingCart {
     @Id
     private String id;
     // OneToMany --- the one side owns the relationship
-    private List<CartItem> cartItems = new ArrayList<CartItem>( );
+    private List<CartItem> cartItems = new ArrayList<CartItem>();
     private String customerId;
     private String userName;
 
